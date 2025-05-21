@@ -1,1 +1,38 @@
 Важинский Андрей
+
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include "people.h"
+using namespace std;
+void main()
+{
+
+	system("chcp 1251");
+    fstream outFile; 
+    outFile.open("Out.txt", ios::out); 
+    fstream inFile("In.txt", ios::in); 
+
+    
+    if (!(outFile && inFile))
+    {
+        cout << "Ошибка при открытии файла" << endl;
+       
+    }
+    char c; 
+    people A, buffer_people[15];
+    for (int i = 0; !inFile.eof(); i++) 
+    {
+        inFile >> buffer_people[i].Fam >> buffer_people[i].Voz >> buffer_people[i].Obr >> buffer_people[i].dolz;
+    }
+    for (auto& A: buffer_people ) 
+    {
+      
+        if (A.Voz >= 30 && A.Obr != "Высшее") outFile << A.Fam << " " << A.Voz << " " << A.Obr << " " << A.dolz << "\n";                                                                                                                 
+    }
+    
+    outFile.close();
+    inFile.close();
+    
+}
